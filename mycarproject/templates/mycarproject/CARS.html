@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background-image: url('{% static "images/width.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .car-container {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 20px;
+            justify-content: flex-start; /* Align cards to the left */
+        }
+
+        .car-card {
+            width: 310px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .car-card:hover {
+            transform: scale(1.05);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .details {
+            padding: 15px;
+            word-spacing: 10px; /* Adds 10px of space between words */
+            flex-grow: 1;
+        }
+
+        .details h3 {
+            margin: 10px 0;
+        }
+
+        .details p {
+            margin: 5px 0;
+            font-family: bold;
+            
+        }
+
+   
+
+        .price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .latest-cars {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .latest-cars h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .sale-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .sale-button:hover {
+            background-color: darkred;
+        }
+
+        .highlighted {
+            border: 3px solid  yellow;
+            animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px red;
+    }
+    to {
+        box-shadow: 0 0 20px darkred;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <div class="header">
+        <h1>OUR CAR INVENTORY</h1>
+        <div class="breadcrumb">
+            <a href="{% url 'home' %}">Home</a> / Cars
+        </div>
+    </div>
+
+
+    <div class="carousel-container">
+        <div class="car-container">
+            {% for car in data %}
+            <div class="car-card {% if highlighted_id == car.id %}highlighted{% endif %}">
+
+                    <a href="{% url 'create_order_with_details' car.id %}"></a>
+                    
+                        <img src="{{ car.photo.url }}" alt="{{ car.name }}" style="max-width: 100%; height: auto;">
+                    </a>
+                    <div class="details">
+                        <h3>{{ car.name }}</h3>
+                        <p>Location: {{ car.location }}</p>
+                        <p>fuel_type: {{ car.fuel_type }}</p>
+                        <p>Mileage: {{ car.mileage }}</p>
+                        <p>Transmission: {{ car.transmission }}</p>
+                        <p>Color: {{ car.color }}</p>
+                        <p>Year: {{ car.year }}</p>
+                    </div>
+                    <div class="price">
+                        ${{ car.price }}
+                    </div>
+                    <a href="{% url 'create_order_with_details' car.id %}" class="sale-button">
+                        FOR SALE
+                    </a>
+  
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

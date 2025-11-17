@@ -1,0 +1,126 @@
+{% extends 'mycarproject/base.html' %}
+
+{% block content %}
+<style>
+    
+    .container {
+        width: 500px;
+        margin: 50px auto; 
+        padding: 30px;
+        background-color: #fff; 
+        border-radius: 10px; 
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+        
+    }
+
+    
+    .container h2 {
+        text-align: center;
+        color: #333; 
+        margin-bottom: 30px; 
+    }
+
+    
+    .container p {
+        margin-bottom: 20px; 
+    }
+
+    .container label {
+        display: block; 
+        margin-bottom: 5px; 
+        color: #555; 
+        font-weight: bold;
+    }
+
+    .container input[type="text"],
+    .container input[type="email"],
+    .container input[type="tel"] { 
+        width: 100%; 
+        padding: 12px;
+        border: 1px solid #ddd; 
+        border-radius: 5px; 
+        box-sizing: border-box; 
+        font-size: 16px;
+    }
+
+    
+    .container input[type="text"]:focus,
+    .container input[type="email"]:focus,
+    .container input[type="tel"]:focus {
+        border-color: #66afe9; 
+        outline: none; 
+        box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); 
+    }
+
+    
+    .container button[type="submit"] {
+        background-color: #4CAF50;
+        color: white; 
+        padding: 14px 20px;
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        font-size: 18px; 
+        display: block; 
+        width: 100%; 
+        transition: background-color 0.3s ease; 
+    }
+
+ 
+    .container button[type="submit"]:hover {
+        background-color: #45a049; 
+    }
+
+    .container .errorlist {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f2dede; 
+        color: #a94442; 
+        border: 1px solid #ebccd1;
+        border-radius: 5px;
+        list-style: none; 
+    }
+
+
+
+</style>
+
+<div class="container">
+    <h2>Create Customer</h2>
+    <form method="post" id="customerForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const customerForm = document.getElementById('customerForm');
+        const inputs = customerForm.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.length < 3) {
+                    this.style.borderColor = 'red'; 
+                } else {
+                    this.style.borderColor = '#66afe9'; 
+                }
+            });
+        });
+
+        customerForm.addEventListener('submit', function(event) {
+            let formValid = true;
+            inputs.forEach(input => {
+                if (input.value.length < 3) {
+                    alert('Please fill in all fields with at least 3 characters.');
+                    formValid = false;
+                    event.preventDefault(); 
+                    return;
+                }
+            });
+        });
+    });
+
+</script>
+
+{% endblock %}

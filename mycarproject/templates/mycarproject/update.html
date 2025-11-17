@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Form</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: sans-serif;
+        }
+
+        .custom-form-container {
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 1px;
+        }
+
+        .custom-form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-form-title {
+            color: darkgreen;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .custom-form-field {
+            margin-bottom: 20px;
+        }
+
+        .custom-form-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .custom-form-field input[type="text"],
+        .custom-form-field input[type="number"],
+        .custom-form-field input[type="email"],
+        .custom-form-field input[type="tel"],
+        .custom-form-field select,
+        .custom-form-field textarea {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        /* ✅ Updated styling for rounded smaller buttons */
+        .custom-update-button {
+            background-color: #0000FF;
+            color: white;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9em;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .custom-update-button:hover {
+            background-color: #00008B;
+        }
+
+        .custom-cancel-link {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .custom-cancel-link:hover {
+            background-color: #cc0000;
+            text-decoration: none;
+        }
+
+        .custom-form-buttons {
+            margin-top: 25px;
+        }
+
+        .custom-form-field .errorlist {
+            color: red;
+            list-style-type: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="custom-form-container">
+    <div class="custom-form-box">
+        <h2 class="custom-form-title">Update Order</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="custom-form-field">
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: grey">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p style="color: red; font-size: 0.9em;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div style="color: red; margin-bottom: 15px;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="custom-form-buttons">
+                <button type="submit" class="custom-update-button">Update Order</button>
+                <a href="{% url 'dashboard' %}" class="custom-cancel-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

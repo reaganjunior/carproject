@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Form</title>
+  <style>
+    body {
+      background-color: #20d3b0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Top-left logo positioning */
+    .navbar-left {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .navbar-logo img {
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .form-container {
+      background: #2c3e50;
+      padding: 40px;
+      border-radius: 10px;
+      width: 360px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header h2 {
+      color: white;
+      font-size: 24px;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+
+    .form-header span {
+      color: #1abc9c;
+      font-size: 14px;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px 10px;
+      margin: 15px 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-container input::placeholder {
+      color: #ccc;
+      letter-spacing: 1px;
+    }
+
+    .form-container button {
+      width: 100%;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .form-container button:hover {
+      background-color: #16a085;
+    }
+
+    .register-link {
+      margin-top: 25px;
+      color: white;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .register-link a {
+      color: #1abc9c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top-left logo -->
+  <div class="navbar-left">
+    <div class="navbar-logo">
+      <a href="{% url 'home' %}">
+        <img src="{% static 'images/lop.png' %}" alt="DreamCar Logo" />
+      </a>
+    </div>
+  </div>
+
+  <!-- Login form -->
+  <div class="form-container">
+    <div class="form-header">
+      <h2>LOGIN</h2>
+      <span>Welcome back</span>
+    </div>
+
+    <form method="POST" id="loginForm">
+      {% csrf_token %}
+      <input type="text" name="username" id="username" placeholder="Enter your username" required />
+      <input type="password" name="password" id="password" placeholder="Enter your password" required />
+      <button type="submit">LOGIN</button>
+    </form>
+
+    <p class="register-link">
+      DON'T HAVE AN ACCOUNT? <a href="{% url 'register' %}">REGISTER</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username.length < 2) {
+        alert('Username must be at least 2 characters');
+        e.preventDefault();
+      }
+
+      if (password.length < 3) {
+        alert('Password must be at least 3 characters');
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+</html>

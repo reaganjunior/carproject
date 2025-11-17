@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm_delete </title>
+    <style>
+        .delete-confirm-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+        }
+    
+        .delete-card {
+            background: white;
+            padding: 2.5rem 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+    
+        .delete-card h2 {
+            color: #dc3545;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+    
+        .delete-card p {
+            margin-bottom: 2rem;
+        }
+    
+        .delete-card form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+    
+        .btn-rounded {
+            border-radius: 50px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+        }
+    
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+        }
+    
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: white;
+        }
+    
+        .btn-danger:hover,
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+
+</head>
+<body>
+    
+<div class="delete-confirm-container">
+    <div class="delete-card text-center">
+        <h2>Confirm Delete</h2>
+        <p>Are you sure you want to delete the order for <strong>{{ order.name }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-rounded">Yes, Delete</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-rounded">Cancel</a>
+        </form>
+    </div>
+</div>
+    
+</body>
+</html>

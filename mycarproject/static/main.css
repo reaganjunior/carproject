@@ -1,0 +1,95 @@
+#bg {
+    background-repeat: no-repeat;
+    background-size: cover; /* Use 'cover' to make it fill the viewport */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; /* Keep it fixed during scrolling */
+    height: 100vh; 
+    width: 100vw; /* Ensure the background covers the full viewport width */
+}
+
+
+
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+
+/* Authentication Buttons */
+.auth-container {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between buttons */
+}
+
+.auth-container .btn {
+    text-decoration: none;
+    color: white;
+ 
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-btn {
+    background-color: #3498db;
+}
+
+.register-btn {
+    background-color: #2ecc71;
+}
+
+.logout-btn {
+    background-color: #e74c3c;
+}
+
+/* Navigation Bar */
+.navbar {
+    
+    padding: 15px 20px; /* Add horizontal padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+    
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    /* Center menu absolutely */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+    
+} 
+
+.navbar-menu a:hover {
+    color: #f1c40f;
+}
+
+/* Adjust auth-container to sit at the right of the navbar */
+.auth-container {
+    position: absolute;
+    right: 20px; /* Space from the right edge */
+}

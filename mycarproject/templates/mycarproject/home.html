@@ -1,0 +1,174 @@
+{% extends 'mycarproject/base.html' %}
+{% block content %}
+
+<style>
+
+
+    .hero {
+        position: absolute;
+        left: 5%;
+        top: 40%;
+        text-align: left;
+        color: white;
+        max-width: 40%;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        white-space: nowrap; 
+        animation: slide 2s 1s forwards ease;
+        transform: .3s;
+
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        animation: slide 2s 2s forwards ease;
+        transform: .3s;
+    }
+
+    .cta {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    /* Right-Side Search Form */
+    .search-container {
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    background: rgba(255, 255, 255, 0.08); /* More transparent */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    width: 320px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Soft border */
+}
+
+
+    .search-container input, 
+    .search-container select, 
+    .search-container button {
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        width: 100%;
+        min-height: 40px; /* example value */
+        
+    }
+
+    .search-container button {
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 12px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            position: static;
+            text-align: center;
+            max-width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .search-container {
+            position: static;
+            width: 90%;
+            margin: 20px auto;
+        }
+    }
+@keyframes slide{
+    0%{
+        opacity: 0;
+        transform: translateX(-100%);
+
+    }
+    100%{
+        opacity: 1;
+        transform: translate(0%);
+    }
+
+}
+@keyframes dowm{
+    0%{
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+</style>
+
+<div class="hero">
+    <h1>EXPLORE YOUR DREAM CAR</h1>
+    <p>Allow us to guide you through the <strong>innovative</strong> stress-free <br> approach in finding your <strong>dream car.</strong></p>
+    <a href="#" class="cta">READ MORE</a>
+</div>
+
+<!-- Search Form on Right Side -->
+<div class="search-container">
+    <form method="get" action="{% url 'cars' %}">
+        <input type="text" name="name" placeholder="Search by name">
+
+        <select name="transmission">
+            <option value="">Transmission</option>
+            <option value="manual">manual</option>
+            <option value="automatic">automatic</option>
+        </select>
+
+        <select name="fuel_type">
+            <option value="">Fuel Type</option>
+            <option value="petrol">petrol</option>
+            <option value="diseal">diseal</option>
+            
+        </select>
+
+        <select name="color">
+            <option value="">color</option>
+            <option value="Black">Black</option>
+            <option value="yellow">yellow</option>
+            <option value="Red">Red</option>
+           
+        </select>
+
+        <select name="year">
+            <option value="">year</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2023">2023</option>
+            <option value="2021">2021</option>
+            <option value="2024">2024</option>
+            <option value="2022">2022</option>
+        </select>
+
+        <button type="submit">SEARCH</button>
+    </form>
+</div>
+
+
+{% endblock content %}

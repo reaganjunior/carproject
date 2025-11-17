@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #20d3b0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo container fixed at the top-left */
+        .navbar-left {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .navbar-logo img {
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .form-container {
+            background-color: #2c3e50;
+            padding: 40px;
+            border-radius: 10px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .form-container h2 {
+            color: white;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .form-container p {
+            color: #1abc9c;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .form-container input {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-container input::placeholder {
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #16a085;
+        }
+
+        .form-container small {
+            display: block;
+            margin-top: 15px;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .form-container small a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        .form-container small a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo at top left -->
+    <div class="navbar-left">
+        <div class="navbar-logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/lop.png' %}" alt="DreamCar Logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Registration form centered -->
+    <div class="form-container">
+        <h2>REGISTER</h2>
+        <p>IT'S COMPLETELY FREE</p>
+        <form method="POST" id="registerForm">
+            {% csrf_token %}
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password1" id="password1" placeholder="Create Password" required>
+            <input type="password" name="password2" id="password2" placeholder="Confirm Password" required>
+            <button type="submit">CREATE ACCOUNT</button>
+        </form>
+        <small>ALREADY HAVE AN ACCOUNT? <a href="{% url 'login' %}">LOGIN</a></small>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            let password1 = document.getElementById("password1").value;
+            let password2 = document.getElementById("password2").value;
+
+            if (password1.length < 3) {
+                alert("Password must be at least 3 characters long.");
+                event.preventDefault();
+                return;
+            }
+
+            if (password1 !== password2) {
+                alert("Passwords do not match. Please try again.");
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

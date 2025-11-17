@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamCar</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        .username-display {
+            color: yellow;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            height: 80px; /* Adjust based on your logo size */
+            margin-right: 1200px;/* Pushes logo to the far left */
+            border-radius: 90%; 
+           
+        }
+
+      
+    </style>
+</head>
+<body id="bg" style="background-image: url('{% static 'images/yaa.jpg' %}');">
+    <header>
+        <nav class="navbar">
+            <!-- Logo and menu -->
+            <div class="navbar-left">
+                <div class="navbar-logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'images/lop.png' %}" alt="DreamCar Logo">
+                    </a>
+                </div>
+
+            </div>
+                <ul class="navbar-menu">
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li><a href="{% url 'add_car' %}">ADD CAR</a></li>
+                    <li><a href="{% url 'cars' %}">CARS</a></li>
+                    <li><a href="{% url 'contact' %}">CONTACT</a></li>
+                    <li><a href="{% url 'dashboard' %}">DASHBOARD</a></li>
+                </ul>
+            
+
+            <!-- Auth buttons -->
+            <div class="auth-container">
+                {% if user.is_authenticated %}
+                    <span class="username-display">Welcome, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}" class="btn logout-btn">LOGOUT</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn login-btn"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+                    <a href="{% url 'register' %}" class="btn register-btn"><i class="fas fa-user"></i> REGISTER</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

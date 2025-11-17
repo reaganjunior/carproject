@@ -1,0 +1,150 @@
+
+
+{% extends 'mycarproject/base.html' %}
+{% block content %}
+
+<div class="form-container">
+    <h2>Create Order</h2>
+    <form method="POST" id="OrderForm">
+        {% csrf_token %}
+
+        
+   
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required value="{{data.name}}" >
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" required value="{{data.price}}">
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" name="location" id="location" required value="{{data.location}}">
+        </div>
+
+        <div class="form-group">
+            <label for="fuel_type">Fuel Type:</label>
+            <input type="text" name="fuel_type" id="fuel_type" required value="{{data.fuel_type}}">
+        </div>
+        
+
+        <div class="form-group">
+            <label for="mileage">Mileage:</label>
+            <input type="text" name="mileage" id="mileage" required value="{{data.mileage}}">
+        </div>
+
+        <div class="form-group">
+            <label for="transmission">Transmission:</label>
+            <input type="text" name="transmission" id="transmission" required value="{{data.transmission}}">
+        </div>
+
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <input type="text" name="color" id="color" required value="{{data.color}}">
+        </div>
+
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" name="year" id="year" required value="{{data.year}}">
+        </div>
+
+
+        <div class="form-group">
+            <label for="buyer_name">buyer_name:</label>
+            <input type="text" name="buyer_name" id="buyer_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="buyer_phone">buyer_phone:</label>
+            <input type="text" name="buyer_phone" id="buyer_phone" required>
+        </div>
+
+        <button type="submit" class="submit-button">Save Order</button>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        // Basic form validation (you can add more complex validation)
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const location = document.getElementById('location').value;
+        const fuelType = document.getElementById('fuel_type').value;
+        const mileage = document.getElementById('mileage').value;
+        const transmission = document.getElementById('transmission').value;
+        const color = document.getElementById('color').value;
+        const year = document.getElementById('year').value;
+
+        if (!name || !price || !location || !fuelType || !mileage || !transmission || !color || !year) {
+            alert('Please fill in all fields.');
+            event.preventDefault(); // Prevent form submission
+        }
+
+        // You can add more JavaScript logic here (e.g., AJAX submission, dynamic field updates)
+    });
+</script>
+
+<style>
+ 
+
+    .form-container {
+        width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .submit-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .submit-button:hover {
+        background-color: #45a049;
+    }
+
+    .form-group input:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+</style>
+
+{% endblock %}
